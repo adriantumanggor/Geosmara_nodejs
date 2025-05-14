@@ -17,27 +17,11 @@ git clone https://github.com/yourusername/your-repo-name.git
 cd your-repo-name
 ```
 
-### 2. Konfigurasi Environment
-
-1. Salin file environment contoh:
-   ```bash
-   # Di Windows (Command Prompt)
-   copy .env.example .env
-   
-   # Di Windows (PowerShell)
-   Copy-Item .env.example .env
-   
-   # Di Linux/Mac
-   cp .env.example .env
-   ```
-
-2. Edit file `.env` sesuai kebutuhan (opsional)
-
-### 3. Menjalankan Aplikasi
+### 2. Menjalankan Aplikasi
 
 ```bash
 # Di Windows/Mac/Linux
-docker compose up -d
+docker compose up 
 ```
 
 Perintah ini akan:
@@ -63,9 +47,8 @@ Setelah masuk ke pgAdmin, tambahkan koneksi ke server PostgreSQL:
 2. Pilih "Create" > "Server"
 3. Di tab "General", masukkan nama server (misalnya "Local PostgreSQL")
 4. Di tab "Connection":
-   - Host name/address: `postgres` (nama service di docker-compose)
+   - Host name/address: `geos_postgres` 
    - Port: `5432`
-   - Maintenance database: `project_db` (atau sesuai nilai POSTGRES_DB di `.env`)
    - Username: `admin` (atau sesuai nilai POSTGRES_USER di `.env`)
    - Password: `password` (atau sesuai nilai POSTGRES_PASSWORD di `.env`)
 5. Klik "Save"
@@ -94,8 +77,7 @@ project-name/
 ├── .env.example           # Contoh variabel lingkungan
 │
 ├── api/                   # Direktori untuk kode Node.js
-│   ├── Dockerfile         # Dockerfile untuk aplikasi Node.js
-│   ├── entrypoint.sh      # Script untuk memastikan PostgreSQL telah siap
+│   ├── Dockerfile         # Dockerfile untuk aplikasi Node.js      
 │   ├── package.json       # Dependensi Node.js
 │   ├── src/               # Kode sumber aplikasi
 │   │   └── index.js       # Entry point aplikasi
