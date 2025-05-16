@@ -217,3 +217,38 @@ Jika mengalami masalah izin file di Linux:
 ## Kontributor
 
 [Daftar kontributor proyek]
+
+Misalnya, sebuah buku yang memiliki bab dan sub-bab dengan beberapa level:
+
+    Bab 1: Pendahuluan
+
+        Sub-bab 1.1: Latar Belakang
+
+            Sub-sub-bab 1.1.1: Sejarah Singkat
+
+            Sub-sub-bab 1.1.2: Masalah Utama
+
+        Sub-bab 1.2: Tujuan
+
+    Bab 2: Metodologi
+
+        Sub-bab 2.1: Teknik Pengumpulan Data
+
+            Sub-sub-bab 2.1.1: Wawancara
+
+            Sub-sub-bab 2.1.2: Observasi
+
+    Bab 3: Hasil dan Pembahasan
+
+| **id** | **book\_id** | **parent\_id** | **sequence\_number** | **title**               |
+| ------ | ------------ | -------------- | -------------------- | ----------------------- |
+| 1      | 1            | NULL           | 1                    | Pendahuluan             |
+| 2      | 1            | NULL           | 2                    | Metodologi              |
+| 3      | 1            | NULL           | 3                    | Hasil dan Pembahasan    |
+| 4      | 1            | 1              | 1.1                  | Latar Belakang          |
+| 5      | 1            | 1              | 1.2                  | Tujuan                  |
+| 6      | 1            | 4              | 1.1.1                | Sejarah Singkat         |
+| 7      | 1            | 4              | 1.1.2                | Masalah Utama           |
+| 8      | 1            | 2              | 2.1                  | Teknik Pengumpulan Data |
+| 9      | 1            | 8              | 2.1.1                | Wawancara               |
+| 10     | 1            | 8              | 2.1.2                | Observasi               |
