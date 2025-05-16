@@ -10,10 +10,70 @@ books
 chapters
 - id
 - book_id (FK ke books)
-- parent_id (FK ke chapters, nullable)
-- sequence_number (INTEGER)
-- level (INTEGER)
 - title
-- content (TEXT/LONGTEXT)
+- sequence_number (INTEGER)
+- summary (TEXT) -- Untuk menyimpan rangkuman chapter
 - created_at (TIMESTAMP)
 - updated_at (TIMESTAMP)
+
+subchapters
+- id
+- chapter_id (FK ke chapters)
+- title
+- sequence_number (INTEGER)
+- content (TEXT/LONGTEXT) -- Untuk menyimpan konten utama subchapter
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+
+pilihan
+[
+    sql{
+        exercises
+        - id
+        - chapter_id (FK ke chapters)
+        - created_at (TIMESTAMP)
+        - updated_at (TIMESTAMP)
+
+        exercise_questions
+        - id
+        - exercise_id (FK ke exercises)
+        - question_number (INTEGER) -- nomor urut soal
+        - content (TEXT) -- isi soal
+        - answer (TEXT) -- jawaban atau pembahasan soal
+        - created_at (TIMESTAMP)
+        - updated_at (TIMESTAMP)
+    },
+    nosql{
+        exercises/
+        ├─ {exercise_id}/
+        │   ├─ chapter_id: string
+        │   ├─ created_at: timestamp
+        │   ├─ updated_at: timestamp
+        │   ├─ questions: [
+        │   │   {
+        │   │     question_number: number,
+        │   │     content: string,
+        │   │     answer: string
+        │   │   },
+        │   │   ...
+        │   │ ]
+
+        user_progress/
+        ├─ {user_id}/
+        │   ├─ exercises/
+        │   │   ├─ {exercise_id}/
+        │   │   │   ├─ started_at: timestamp
+        │   │   │   ├─ completed_at: timestamp (null jika belum selesai)
+        │   │   │   ├─ progress_percentage: number (0-100)
+        │   │   │   ├─ question_attempts: [
+        │   │   │   │   {
+        │   │   │   │     question_number: number,
+        │   │   │   │     attempted: boolean,
+        │   │   │   │     is_correct: boolean,
+        │   │   │   │     attempts_count: number,
+        │   │   │   │     last_attempt_at: timestamp
+        │   │   │   │   },
+        │   │   │   │   ...
+        │   │   │   │ ]
+    }
+]
