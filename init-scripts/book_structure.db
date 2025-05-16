@@ -1,0 +1,19 @@
+books
+- id
+- title
+- author
+- description
+- cover_url
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
+
+chapters
+- id
+- book_id (FK ke books)
+- parent_id (FK ke chapters, nullable)
+- sequence_number (INTEGER)
+- level (INTEGER)
+- title
+- content (TEXT/LONGTEXT)
+- created_at (TIMESTAMP)
+- updated_at (TIMESTAMP)
